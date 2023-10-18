@@ -1,18 +1,18 @@
 {
-  "name": "create-rodrigo-work",
-  "version": "1.0.1",
-  "description": "Clone and create CLI",
+  "name": "rodrigo-work",
+  "version": "1.0.9",
+  "description": "Clone and create apps to my repository CLI",
   "main": "./bin/index.js",
   "bin": {
-    "create-rodrigo-work": "./bin/index.js"
+    "rodrigo-work": "./bin/index.js"
   },
   "scripts": {
-    "test": "test",
+    "test": "console.log(\"OK\")",
     "push": "git add . && git commit --amend -m \"Initial Commit\" &&  git push -u --force origin main"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rodrigo3d/create-rodrigo-work.git"
+    "url": "https://github.com/rodrigo3d/rodrigo-work.git"
   },
   "keywords": [
     "create"
@@ -20,12 +20,15 @@
   "author": "Rodrigo Ribeiro",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rodrigo3d/create-rodrigo-work/issues"
+    "url": "https://github.com/rodrigo3d/rodrigo-work/issues"
   },
   "preferGlobal": true,
-  "homepage": "https://github.com/rodrigo3d/create-rodrigo-work",
+  "homepage": "https://github.com/rodrigo3d/rodrigo-work",
   "dependencies": {
-    "unzip": "^0.1.11",
-    "yargs": "^17.7.2"
+    "commander": "^12.0.0",
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }
