@@ -1,34 +1,20 @@
 {
   "name": "rodrigo-work",
-  "version": "1.0.9",
-  "description": "Clone and create apps to my repository CLI",
-  "main": "./bin/index.js",
-  "bin": {
-    "rodrigo-work": "./bin/index.js"
-  },
+  "private": true,
   "scripts": {
-    "test": "console.log(\"OK\")",
-    "push": "git add . && git commit --amend -m \"Initial Commit\" &&  git push -u --force origin main"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rodrigo3d/rodrigo-work.git"
-  },
-  "keywords": [
-    "create"
-  ],
-  "author": "Rodrigo Ribeiro",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rodrigo3d/rodrigo-work/issues"
-  },
-  "preferGlobal": true,
-  "homepage": "https://github.com/rodrigo3d/rodrigo-work",
-  "dependencies": {
-    "commander": "^12.0.0",
-    "shelljs": "^0.8.5"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.2",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
   }
 }
