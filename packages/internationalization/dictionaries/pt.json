@@ -1,0 +1,16 @@
+{
+  "web": {
+    "privacy": {
+      "meta": {
+        "title": "Politica de Privacidade",
+        "description": "Nós valorizamos sua privacidade e estamos comprometidos em proteger seus dados pessoais."
+      }
+    },
+    "terms": {
+      "meta": {
+        "title": "Termos de Uso",
+        "description": "Ao utilizar nossa plataforma, concorda com estes termos e condições de uso."
+      }
+    }
+  }
+}
