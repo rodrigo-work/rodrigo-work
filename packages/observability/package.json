@@ -1,0 +1,24 @@
+{
+  "name": "@repo/observability",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@logtail/next": "^0.2.0",
+    "@sentry/nextjs": "^9.22.0",
+    "@t3-oss/env-nextjs": "^0.13.4",
+    "react": "^19",
+    "server-only": "^0.0.1",
+    "zod": "^4.0.10"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
