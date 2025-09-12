@@ -1,48 +1,54 @@
-/** @type {import('next').NextConfig} */
-import { NextConfig } from 'next'
+import { env } from '@/env'
+import { config, withAnalyzer } from '@repo/next-config'
+import { withLogging } from '@repo/observability/next-config'
+import { createMDX } from 'fumadocs-mdx/next'
+import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
-  // devIndicators: true,
-  // transpilePackages: ['../../packages/*'],
+const withMDX = createMDX()
+let nextConfig: NextConfig = {}
+
+nextConfig = {
+  reactStrictMode: true,
+  transpilePackages: [
+    '@repo/design-system',
+    '@repo/seo',
+    '@repo/observability',
+    '@repo/next-config'
+  ],
+  experimental: {
+    authInterrupts: true
+  },
   typescript: {
     ignoreBuildErrors: false
   },
   eslint: {
     ignoreDuringBuilds: false
   },
-
-  trailingSlash: false,
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/og/:path*',
-  //       destination: '/api/og/:path*'
-  //     }
-  //     //     {
-  //     //       source: '/en/docs',
-  //     //       destination: 'https://rodrigo-work.mintlify.app'
-  //     //     },
-  //     //     {
-  //     //       source: '/en/docs/:path+',
-  //     //       destination: 'https://rodrigo-work.mintlify.app/:path+' // Matched parameters can be used in the destination
-  //     //     }
-  //   ]
-  // },
-
   async redirects() {
     return [
       {
-        source: '/og/:slug*',
-        destination: '/api/og/:slug*', // Matched parameters can be used in the destination
+        source: '/health(z)?',
+        destination: '/api/health',
         permanent: false
       },
       {
-        source: '/osg/:path*',
-        destination: 'https://rodrigo-work.mintlify.app/:path*', // Matched parameters can be used in the destination
+        source: '/og/:slug*',
+        destination: '/api/og/:slug*',
         permanent: false
       }
     ]
-  }
+  },
+  ...config
 }
 
-export default nextConfig
+nextConfig = withLogging(nextConfig)
+
+// if (env.VERCEL) {
+//   nextConfig = withSentry(nextConfig)
+// }
+
+if (env.ANALYZE === 'true') {
+  nextConfig = withAnalyzer(nextConfig)
+}
+
+export default withMDX(nextConfig)
