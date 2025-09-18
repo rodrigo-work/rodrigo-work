@@ -1,0 +1,7 @@
+{
+  "title": "Packages",
+  "description": "The docs packages",
+  "icon": "Package",
+  "root": true,
+  "pages": ["index", "---", "email", "next-config", "seo", "observability"]
+}

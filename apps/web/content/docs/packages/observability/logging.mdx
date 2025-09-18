@@ -18,3 +18,34 @@ import { log } from '@repo/observability/log';
 
 log.info('Hello, world!');
 ```
+
+
+## 🪵 Logging
+
+### Como o `next-forge` está configurado para logging
+
+A funcionalidade de logging é abstraída por um *wrapper* simples que fornece uma **interface de log consistente entre ambientes** (desenvolvimento e produção).
+
+---
+
+### ⚙️ Como funciona
+
+- **Em desenvolvimento**: os logs são exibidos no console para facilitar o debug.
+- **Em produção**: os logs são enviados para o **BetterStack Logs**, onde podem ser **pesquisados, filtrados e analisados**.
+
+---
+
+### 🧪 Como usar
+
+Para utilizar esse sistema de logging, basta importar o objeto `log`.
+
+A interface do `log` é idêntica à do objeto `console`, então você pode **substituir `console` por `log`** diretamente no seu código.
+
+#### Exemplo:
+
+```tsx
+// page.tsx
+
+import { log } from '@repo/observability/log';
+
+log.info('Hello, world!');

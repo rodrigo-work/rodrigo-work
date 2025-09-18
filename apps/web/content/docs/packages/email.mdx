@@ -1,15 +1,25 @@
 ---
 title: Transactional Emails
-descriptions: How all other transactional emails work.
+description: Pacote @repo/email com suporte a Resend + React Email
 ---
 
-We use [Resend](https://resend.com/) to send transactional emails. The templates, located in `@repo/email`, are powered by [React Email](https://react.email/) - a collection of high-quality, unstyled components for creating beautiful emails using React and TypeScript.
+Utilizamos o serviço [Resend](https://resend.com/) para envio de **e-mails transacionais**.
+Os templates, localizados no pacote `@repo/email`, são construídos com [React Email](https://react.email/):
+uma coleção de componentes de alta qualidade (e sem estilo) para criação de e-mails com **React** e **TypeScript**.
 
-## Sending Emails
+## Instalação
 
-To send an email, you can use the `resend` object, which is imported from the `@repo/email` package:
+Para instalar o pacote `@repo/email`, execute o seguinte comando:
 
-```tsx title="apps/web/app/contact/actions/contact.tsx"
+```package-install
+npx @rodrigo-work/cli add --name packages/email
+```
+
+## Envio de E-mails
+
+Para enviar um e-mail, você pode usar o objeto `resend`, importado do pacote `@repo/email`:
+
+```tsx
 import { resend } from '@repo/email';
 
 await resend.emails.send({
@@ -17,17 +27,17 @@ await resend.emails.send({
   to: 'recipient@acme.com',
   subject: 'The email subject',
   text: 'The email text',
-});
+});''
 ```
 
-## Email Templates
+## Templates de E-mail
 
-The `email` package is separated from the app folder for two reasons:
+O pacote `email` é separado da pasta da aplicação principal por dois motivos:
 
-1. We can import the templates into the `email` app, allowing for previewing them in the UI; and
-2. We can import both the templates and the SDK into our other apps and use them to send emails.
+1. Permite importar os templates no app de `email`, possibilitando a **pré-visualização na interface (UI)**.
+2. Permite importar tanto os templates quanto o SDK em outras aplicações para **uso direto no envio de e-mails**.
 
-Resend and React Email play nicely together. For example, here's how you can send a transactional email using a React email template:
+O Resend funciona perfeitamente com o React Email. Veja um exemplo de envio usando um template React:
 
 ```tsx title="apps/web/app/contact/actions/contact.tsx"
 import { resend } from '@repo/email';
@@ -41,6 +51,20 @@ await resend.emails.send({
 });
 ```
 
-## Previewing Emails
+## Pré-visualização de E-mails
 
-To preview the emails templates, simply run the [`email` app](/apps/email).
+Para visualizar os templates, basta executar o app [`email`](/apps/email).
+
+```tsx title="apps/web/app/contact/actions/contact.tsx"
+import { resend } from '@repo/email';
+import { ContactTemplate } from '@repo/email/templates/contact';
+
+await resend.emails.send({
+  from: 'sender@acme.com',
+  to: 'recipient@acme.com',
+  subject: 'The email subject',
+  react: <ContactTemplate name={name} email={email} message={message} />,
+});
+```
+
+A aplicação exibirá os templates renderizados no navegador, facilitando ajustes de layout e conteúdo antes do envio.
