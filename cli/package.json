@@ -1,0 +1,40 @@
+{
+  "name": "@rodrigo-work/cli",
+  "version": "1.0.3",
+  "type": "module",
+  "description": "The CLI tool for Rodrigo Work",
+  "keywords": [
+    "NextJs",
+    "Docs"
+  ],
+  "main": "dist/index.cjs",
+  "bin": {
+    "cli": "dist/index.cjs"
+  },
+  "files": [
+    "dist/index.cjs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
+    "build": "tsup",
+    "build:prod": "tsup && npm version patch --no-git-tag-version && npx javascript-obfuscator dist --output dist --self-defending true",
+    "start": "node dist/index.cjs",
+    "test": "NODE_ENV=test vitest run",
+    "clean": "git clean -xdf .cache .turbo .next dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "commander": "^14.0.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "tsup": "^8.5.0",
+    "typescript": "5.8.2",
+    "zod": "^4.1.9"
+  }
+}

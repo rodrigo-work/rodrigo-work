@@ -1,28 +1,44 @@
 {
   "name": "web",
-  "version": "0.1.0",
-  "type": "module",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --port 3000",
     "build": "next build",
+    "build:prod": "pnpm build && pnpm version patch --no-git-tag-version",
+    "dev": "next dev --turbopack",
     "start": "next start",
-    "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "analyze": "ANALYZE=true && pnpm run build",
+    "postinstall": "fumadocs-mdx",
+    "lint": "biome check",
+    "format": "biome format --write"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
-    "next": "^15.3.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@repo/design-system": "workspace:*",
+    "@repo/seo": "workspace:*",
+    "@repo/observability": "workspace:*",
+    "@repo/next-config": "workspace:*",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "fumadocs-core": "15.7.12",
+    "fumadocs-mdx": "11.10.0",
+    "fumadocs-openapi": "^9.3.9",
+    "fumadocs-ui": "15.7.12",
+    "gray-matter": "^4.0.3",
+    "jose": "^6.1.0",
+    "lucide-react": "^0.511.0",
+    "next": "15.4.0",
+    "react": "^19",
+    "react-dom": "^19",
+    "shiki": "^3.12.2",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.15.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
-    "eslint": "^9.25.0",
-    "typescript": "5.8.2"
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "24.3.3",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
   }
 }

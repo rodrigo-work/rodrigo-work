@@ -1,20 +1,36 @@
 {
-  "name": "rodrigo-work",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
-  "devDependencies": {
-    "prettier": "^3.5.3",
-    "turbo": "^2.5.2",
-    "typescript": "5.8.2"
-  },
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "rodrigo-work",
+	"description": "A personal website for Rodrigo Ribeiro",
+	"version": "0.0.0",
+	"private": true,
+	"author": {
+		"name": "Rodrigo Ribeiro",
+		"email": "me@rodrigo3d.com"
+	},
+	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "ultracite lint",
+		"format": "ultracite format",
+		"test": "turbo test",
+		"analyze": "turbo analyze",
+		"translate": "turbo translate",
+		"boundaries": "turbo boundaries",
+		"bump-deps": "npx npm-check-updates --deep -u -x react-day-picker",
+		"bump-ui": "npx shadcn@latest add --all --overwrite -c packages/design-system",
+		"migrate": "cd packages/database && npx prisma format && npx prisma generate && npx prisma db push",
+		"clean": "turbo clean && git clean -xdf node_modules",
+		"typecheck": "turbo typecheck"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.1.3",
+		"turbo": "^2.5.5",
+		"typescript": "^5.8.3",
+		"ultracite": "^5.1.2"
+	},
+	"packageManager": "pnpm@9.0.0",
+	"engines": {
+		"node": "^20"
+	}
 }

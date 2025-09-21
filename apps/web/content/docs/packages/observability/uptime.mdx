@@ -1,0 +1,33 @@
+---
+title: Uptime Monitoring
+description: Como configuramos o monitoramento de tempo de atividade no rodrigo.work.
+---
+
+A funcionalidade de monitoramento de uptime é configurada através do painel da **[BetterStack](https://betterstack.com/)**.
+
+## Configurando o monitoramento
+
+Ao criar seu projeto, recomendo adicionar algumas URLs específicas para monitoramento. Supondo que estamos usando `example.com` e seus subdomínios, aqui está o que você deve adicionar:
+
+1. `example.com` - site principal (web), deve estar online se a página inicial retornar uma resposta de sucesso.
+2. `app.example.com` - aplicação (app), deve estar online se a página inicial retornar uma resposta de sucesso.
+3. `api.example.com/health` - API, deve estar online se a rota `/health` retornar uma resposta de sucesso. Esse é um endpoint stub que é executado no runtime Edge, portanto é muito rápido.
+
+## Uso na interface (UI)
+
+Esse pacote disponibiliza um componente chamado **`<Status />`**, exportado de `@repo/observability`, que exibe o status atual da aplicação.
+Você pode ver um exemplo de uso desse componente no **[rodapé do site](https://rodrigo.work)**.
+
+O componente pode exibir **três estados diferentes** com base nos monitores configurados:
+
+| Estado                | Condição                                                         |
+|-----------------------|------------------------------------------------------------------|
+| **All systems normal**                     | 100% dos sistemas de uptime estão online    |
+| **Partial outage**                         | Pelo menos um sistema está reportando queda |
+| **Degraded performance**                   | 0% dos sistemas estão online                |
+
+Essa funcionalidade depende das seguintes variáveis de ambiente:
+
+- `BETTERSTACK_API_KEY` - Chave de API para acessar os dados do **[BetterStack](https://betterstack.com/docs/uptime/start/)**.
+- `BETTERSTACK_URL` - https://betterstack.com/docs/uptime/api/list-all-existing-status-pages/
+

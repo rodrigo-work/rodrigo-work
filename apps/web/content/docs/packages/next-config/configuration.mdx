@@ -1,0 +1,34 @@
+---
+title: Configuration
+description: Pacote de configuração do Next.js
+---
+
+O pacote `next-config` é responsável por configurar o aplicativo Next.js e está localizado no diretório `packages/next-config`.
+
+## Imagens
+
+Este pacote configura a otimização de imagens do Next.js com suporte aos formatos **AVIF** e **WebP**.
+Também define padrões remotos que permitem o carregamento seguro de imagens do **Clerk** (como fotos de perfil de usuários).
+
+## Prisma
+
+Para builds no lado do servidor, o pacote inclui o **plugin do Prisma**, que garante o funcionamento correto do Prisma em uma estrutura monorepo com Next.js.
+
+## Rewrites (Reescritas de rota)
+
+O pacote define reescritas de URL para integração com o **PostHog**:
+
+| Rota local                 | Destino                                          |
+|---------------------------|--------------------------------------------------|
+| `/ingest/static/:path*`   | Redireciona para os assets estáticos do PostHog |
+| `/ingest/:path*`          | Redireciona para o endpoint principal de ingestão |
+| `/ingest/decide`          | Redireciona para o endpoint de feature flags    |
+
+Além disso, a opção `skipTrailingSlashRedirect` é ativada para garantir o suporte adequado a requisições da API do PostHog com ou sem barra no final da URL.
+
+## OpenTelemetry
+
+Para evitar *warnings* relacionados à instrumentação do **OpenTelemetry**, o pacote configura o Webpack para **ignorar avisos** vindos dos pacotes `@opentelemetry/instrumentation`.
+
+A configuração pode ser envolvida com a função `withAnalyzer()` para habilitar a análise de bundle, permitindo inspecionar e otimizar o tamanho final da aplicação.
+

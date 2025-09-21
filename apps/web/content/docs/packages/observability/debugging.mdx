@@ -1,0 +1,29 @@
+---
+title: Debugging
+description: How we've configured debugging in next-forge.
+---
+
+next-forge has pre-configured [VSCode](https://code.visualstudio.com/) to work as a debugger. The `.vscode/launch.json` file contains the configuration for the debugger and is configured to work for all the apps in the monorepo.
+
+To use the debugger, simply open the app in VSCode (or any VSCode-compatible editor) and go to the Debug panel (Ctrl+Shift+D on Windows/Linux, ⇧+⌘+D on macOS). Select a launch configuration, then press `F5` or select `Debug: Start Debugging` from the Command Palette to start your debugging session.
+## 🐞 Debugging
+
+### Como o `next-forge` está configurado para depuração
+
+O `next-forge` vem com o **VSCode pré-configurado como depurador**.
+O arquivo `.vscode/launch.json` contém as configurações necessárias e está preparado para funcionar com **todas as aplicações do monorepo**.
+
+---
+
+### ▶️ Como usar o depurador
+
+1. **Abra a aplicação no VSCode** (ou em qualquer editor compatível com o VSCode).
+2. Acesse o painel de **Depuração**:
+   - **Windows/Linux**: `Ctrl + Shift + D`
+   - **macOS**: `⇧ + ⌘ + D`
+3. Selecione uma configuração de execução no menu suspenso.
+4. Pressione `F5` ou execute o comando **"Debug: Start Debugging"** pela Paleta de Comandos (`Ctrl + Shift + P`) para iniciar a sessão de depuração.
+
+---
+
+Essa configuração facilita o processo de desenvolvimento e debugging em ambientes locais, oferecendo uma integração pronta entre o código e o depurador do editor.

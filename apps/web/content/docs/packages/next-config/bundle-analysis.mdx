@@ -1,0 +1,27 @@
+---
+title: Bundle Analysis
+description: Como analisar e otimizar o tamanho do bundle da sua aplicação
+---
+
+O **[rodrigo-work](https://github.com/rodrigo-work/rodrigo-work)** usa o pacote [@vercel/next-bundle-analyzer](https://github.com/vercel/next-bundle-analyzer)
+para analisar e otimizar o tamanho do bundle da sua aplicação.
+Cada aplicação possui um arquivo `next.config.ts` configurado para usar o analisador quando a variável de ambiente `ANALYZE` estiver definida como `true`.
+
+## Como usar
+
+Para executar o analisador, basta rodar o seguinte comando a partir da raiz do projeto:
+
+```sh title="Terminal"
+pnpm analyze
+```
+
+O **Turborepo** executará automaticamente o analisador para cada aplicação quando esse comando for executado.
+
+Assim que o analisador de bundles terminar, ele **abrirá automaticamente três arquivos HTML** no seu navegador padrão:
+
+- **client** – mostra os pacotes carregados no cliente (navegador)
+- **nodejs** – mostra os pacotes carregados no lado do servidor (Node.js)
+- **edge** – mostra os pacotes usados no ambiente edge (Edge Functions)
+
+Cada arquivo exibe um **treemap interativo**, que ajuda a visualizar o tamanho e o impacto dos módulos carregados em cada ambiente.
+
