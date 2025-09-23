@@ -1,7 +1,0 @@
-{
-  "title": "OpenAPI",
-  "description": "A demo for OpenAPI",
-  "root": true,
-  "icon": "Shapes",
-  "pages": ["index", "...(generated)"]
-}

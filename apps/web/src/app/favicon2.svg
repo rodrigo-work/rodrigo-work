@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="42" ry="42" fill="white" />
+
+  <circle
+    cx="210"
+    cy="210"
+    r="24"
+    fill="black"
+    stroke="none"
+    stroke-width="24"
+  />
+
+  <line
+    x1="208"
+    y1="50"
+    x2="50"
+    y2="208"
+    stroke="black"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="32"
+  />
+</svg>

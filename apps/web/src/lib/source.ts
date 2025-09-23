@@ -1,20 +1,35 @@
-import { docs } from '@/.source'
-import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source'
-import { transformerOpenAPI } from 'fumadocs-openapi/server'
+import { type InferPageType, loader } from 'fumadocs-core/source'
 import { icons } from 'lucide-react'
 import { createElement } from 'react'
+import { docs } from '@/.source'
 
 // See https://fumadocs.vercel.app/docs/headless/source-api for more info
 export const source = loader({
   baseUrl: '/docs',
-  icon(icon) {
-    if (icon && icon in icons) return createElement(icons[icon as keyof typeof icons])
-  },
   source: docs.toFumadocsSource(),
-  pageTree: {
-    transformers: [transformerOpenAPI()]
+
+  icon(icon) {
+    if (!icon) {
+      // You may set a default icon
+      return
+    }
+    if (icon in icons) return createElement(icons[icon as keyof typeof icons])
   }
 })
 
-export type Page = InferPageType<typeof source>
-export type Meta = InferMetaType<typeof source>
+export function getPageImage(page: InferPageType<typeof source>) {
+  const segments = [...page.slugs, 'image.png']
+
+  return {
+    segments,
+    url: `/api/og/${segments.join('/')}`
+  }
+}
+
+export async function getLLMText(page: InferPageType<typeof source>) {
+  const processed = await page.data.getText('processed')
+
+  return `# ${page.data.title} (${page.url})
+
+${processed}`
+}
