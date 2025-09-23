@@ -1,14 +1,7 @@
-import { cancel, intro, isCancel, log, outro, select, spinner } from '@clack/prompts'
-import { mkdir, rm } from 'node:fs/promises'
+import { intro, log, outro, spinner } from '@clack/prompts'
 import picocolors from 'picocolors'
-import { exec, execSyncOpts, existingPackages, getExistingPackages } from '../lib/utils.js'
 
-type cloneRodrigoWorkPackageProps = {
-  name: string
-  cloneDir: string
-}
-
-const cloneRodrigoWorkPackage = async ({ name, cloneDir }: cloneRodrigoWorkPackageProps) => {
+const configEnvFiles = async () => {
   const branch = 'develop'
 
   const command = [
@@ -23,35 +16,19 @@ const cloneRodrigoWorkPackage = async ({ name, cloneDir }: cloneRodrigoWorkPacka
   await exec(command.join(' '), execSyncOpts)
 }
 
-const createTemporaryDirectory = async (tempDir: string) => {
-  await rm(tempDir, { recursive: true, force: true })
-  await mkdir(tempDir, { recursive: true })
+function generateRandomBase64({ url = false, size = 32 }: { url?: boolean; size?: number } = {}) {
+  const bytes = crypto.getRandomValues(new Uint8Array(size))
+  return Buffer.from(bytes).toString(`${url ? 'base64url' : 'base64'}`)
 }
 
-export const getPackages = async () => {
-  const value = await select({
-    message: 'Selecione o pacote que deseja adicionar:',
-    options: existingPackages.map((choice) => ({
-      value: choice,
-      label: choice
-    })),
-    initialValue: 'packages/about'
-  })
-  if (isCancel(value)) {
-    cancel('Operação cancelada.')
-    process.exit(0)
-  }
-  return value as string
-}
-
-export const init = async (options: { name?: string }) => {
+export const secret = async ({ options }: { options: { copy?: boolean; raw?: boolean } }) => {
   try {
     const cwd = process.cwd()
+    const token = generateRandomBase64({ url: false, size: 32 })
 
     intro(
       picocolors.bold(picocolors.green(picocolors.italic('Bem vindo, ao CLI do rodrigo.work! 🚀')))
     )
-    await getExistingPackages()
 
     // const getProject = options.name || (await getPackages())
 
@@ -64,7 +41,15 @@ export const init = async (options: { name?: string }) => {
     const s = spinner({ indicator: 'dots' })
 
     s.start(`Preparing to download from ${cwd}...`)
-    await new Promise((r) => setTimeout(r, 3000))
+    await new Promise((r) => setTimeout(r, 1000))
+
+    if (options.copy === true) {
+      log.info(`\n${picocolors.bold(`Secret Key:\n${picocolors.green(token)}`)}\n`)
+    }
+
+    if (options.raw === true) {
+      log.info(`\n${picocolors.bold(`Secret Key:\n${picocolors.green(token)}`)}\n`)
+    }
 
     // s.message(picocolors.green('Creating temporary directory...'))
     // await new Promise((r) => setTimeout(r, 3000))

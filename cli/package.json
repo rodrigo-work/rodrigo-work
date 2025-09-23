@@ -1,8 +1,8 @@
 {
   "name": "@rodrigo-work/cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
-  "description": "The CLI tool for Rodrigo Work",
+  "description": "The CLI tool for rodrigo.work",
   "keywords": [
     "NextJs",
     "Docs"
@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
     "build": "tsup",
-    "build:prod": "tsup && npm version patch --no-git-tag-version && npx javascript-obfuscator dist --output dist --self-defending true",
+    "build:prod": "pnpm build && npm version patch --no-git-tag-version && npx javascript-obfuscator dist --output dist --self-defending true",
     "start": "node dist/index.cjs",
     "test": "NODE_ENV=test vitest run",
     "clean": "git clean -xdf .cache .turbo .next dist node_modules",
