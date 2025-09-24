@@ -1,0 +1,28 @@
+{
+  "name": "@repo/screenshot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@microlink/mql": "^0.14.0",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "cloudinary": "^2.7.0",
+    "lodash.merge": "^4.6.2",
+    "react": "^19",
+    "schema-dts": "^1.1.5",
+    "server-only": "^0.0.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/lodash.merge": "^4.6.9",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "next": "15.4.0",
+    "typescript": "^5.9.2"
+  }
+}
