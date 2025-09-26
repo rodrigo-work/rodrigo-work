@@ -16,4 +16,3 @@ npx @rodrigo-work/cli add --name packages/seo
 
 A documentação completa pode ser acessada em:
 https://rodrigo.work/docs/packages/seo
-
