@@ -6,6 +6,7 @@ export const keys = () =>
   createEnv({
     extends: [vercel()],
     server: {
+      SECRET: z.string().default('my-secret').optional(),
       ANALYZE: z.string().optional(),
 
       // Added by Vercel
@@ -15,6 +16,7 @@ export const keys = () =>
       NEXT_PUBLIC_WEB_URL: z.url()
     },
     runtimeEnv: {
+      SECRET: process.env.SECRET,
       ANALYZE: process.env.ANALYZE,
       NEXT_RUNTIME: process.env.NEXT_RUNTIME,
       NEXT_PUBLIC_WEB_URL: process.env.NEXT_PUBLIC_WEB_URL
