@@ -1,6 +1,6 @@
 import { withLogtail } from '@logtail/next'
-import { keys } from '@repo/observability/keys'
 import { withSentryConfig } from '@sentry/nextjs'
+import { keys } from './keys'
 
 export const sentryConfig: Parameters<typeof withSentryConfig>[1] = {
   org: keys().SENTRY_ORG,

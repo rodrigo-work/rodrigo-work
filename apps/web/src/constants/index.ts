@@ -15,35 +15,15 @@ export const languages = [
   { label: 'Chinese', value: 'zh' }
 ] as const
 
-export const links = [
-  {
-    name: 'Heath Check',
-    desc: 'Check if the application is up and running',
-    href: '/health'
-  },
-  {
-    name: 'Terms of Use',
-    desc: 'Read our terms of use',
-    href: '/terms'
-  },
-  {
-    name: 'Privacy Policy',
-    desc: 'Read our privacy policy',
-    href: '/privacy'
-  },
-  {
-    name: 'Icon Generator',
-    desc: 'Generate your custom icon',
-    href: '/icon'
-  },
-  {
-    name: 'OG Image Generator',
-    desc: 'Generate your custom og image',
-    href: '/og'
-  }
-] as const
-
 export const settings = {
+  navbar: {},
+  site: {
+    name: 'rodrigo.work',
+    short_name: 'rodrigo-work',
+    description: 'website, docs, packages, examples, solutions and others',
+    url: 'https://rodrigo.work',
+    email: 'me@rodrigo.work'
+  },
   docs: {
     github: {
       owner: 'rodrigo-work',
@@ -64,6 +44,6 @@ export const settings = {
     LAST_UPDATED: '1984-02-23'
   },
   name: 'RODRIGO.WORK',
-  title: 'Auth Platform',
-  description: 'Advanced Authentication Platform with Amazon Cognito'
+  title: ` rodrigo.work `,
+  description: 'website, docs, packages, examples, solutions and others'
 }

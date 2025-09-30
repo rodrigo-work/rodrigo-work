@@ -1,3 +1,20 @@
 {
-  "pages": ["index", "---", "openapi", "cli"]
+  "title": "Display Name",
+  "icon": "Package",
+  "root": true,
+  "pages": [
+    "index",
+    "test",
+    "cli",
+    "components",
+    "---My Separator---",
+    "...folder",
+    "...",
+    "!file",
+    "!otherFolder",
+    "---Others links---",
+    "[Vercel][rodrigo.work](https://rodrigo.work)",
+    "[Activity][status.rodrigo.work](https://status.rodrigo.work)"
+  ],
+  "defaultOpen": true
 }

@@ -1,0 +1,56 @@
+{
+  "name": "@rodrigo-work/utils",
+  "version": "0.0.1",
+  "description": "Shared utility functions for the rodrigo.work monorepo and packages.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Rodrigo Ribeiro",
+    "url": "https://rodrigo.work"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodrigo-work/rodrigo-work.git",
+    "directory": "packages/utils"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "utils",
+    "utility",
+    "typescript",
+    "helpers",
+    "rodrigo-work"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "@vitest/ui": "^3.2.4",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

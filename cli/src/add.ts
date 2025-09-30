@@ -1,117 +1,101 @@
+import { cancel, intro, isCancel, log, outro, select, spinner } from '@clack/prompts'
+import { mkdir, rename, rm } from 'node:fs/promises'
 import {
-	cancel,
-	intro,
-	isCancel,
-	log,
-	outro,
-	select,
-	spinner,
-} from "@clack/prompts";
-import { mkdir, rename, rm } from "node:fs/promises";
-import {
-	exec,
-	execSyncOpts,
-	existingPackages,
-	getExistingPackages,
-	tempDirName,
-} from "../lib/utils.js";
+  exec,
+  execSyncOpts,
+  existingPackages,
+  getExistingPackages,
+  tempDirName
+} from './lib/utils.js'
 
 type cloneRodrigoWorkPackageProps = {
-	name: string;
-	cloneDir: string;
-};
+  name: string
+  cloneDir: string
+}
 
-const cloneRodrigoWorkPackage = async ({
-	name,
-	cloneDir,
-}: cloneRodrigoWorkPackageProps) => {
-	const branch = "develop";
+const cloneRodrigoWorkPackage = async ({ name, cloneDir }: cloneRodrigoWorkPackageProps) => {
+  const branch = 'develop'
 
-	const command = [
-		`git clone --filter=blob:none --no-checkout git@github.com:rodrigo-work/rodrigo-work.git ${cloneDir} &&`,
-		`cd ${cloneDir} &&`,
-		`git checkout ${branch} &&`,
-		"git sparse-checkout init --no-cone &&",
-		`git sparse-checkout set ${name} &&`,
-		`git config core.sparseCheckout true`,
-	];
+  const command = [
+    `git clone --filter=blob:none --no-checkout git@github.com:rodrigo-work/rodrigo-work.git ${cloneDir} &&`,
+    `cd ${cloneDir} &&`,
+    `git checkout ${branch} &&`,
+    'git sparse-checkout init --no-cone &&',
+    `git sparse-checkout set ${name} &&`,
+    `git config core.sparseCheckout true`
+  ]
 
-	await exec(command.join(" "), execSyncOpts);
-};
+  await exec(command.join(' '), execSyncOpts)
+}
 
 const createTemporaryDirectory = async (name: string) => {
-	// const cwd = process.cwd()
-	// const tempDir = join(cwd, name)
+  // const cwd = process.cwd()
+  // const tempDir = join(cwd, name)
 
-	await rm(name, { recursive: true, force: true });
-	await mkdir(name, { recursive: true });
-};
+  await rm(name, { recursive: true, force: true })
+  await mkdir(name, { recursive: true })
+}
 
 export const getPackages = async () => {
-	const value = await select({
-		message: "Selecione o pacote que deseja adicionar:",
-		options: existingPackages.map((choice) => ({
-			value: choice,
-			label: choice,
-		})),
-		initialValue: "packages/about",
-	});
-	if (isCancel(value)) {
-		cancel("Operação cancelada.");
-		process.exit(0);
-	}
-	return value as string;
-};
+  const value = await select({
+    message: 'Selecione o pacote que deseja adicionar:',
+    options: existingPackages.map((choice) => ({
+      value: choice,
+      label: choice
+    })),
+    initialValue: 'packages/about'
+  })
+  if (isCancel(value)) {
+    cancel('Operação cancelada.')
+    process.exit(0)
+  }
+  return value as string
+}
 
 export const add = async (options: { name?: string }) => {
-	try {
-		const cwd = process.cwd();
+  try {
+    const cwd = process.cwd()
 
-		await getExistingPackages();
-		intro("Bem vindo, ao CLI do rodrigo.work! 🚀");
+    await getExistingPackages()
+    intro('Bem vindo, ao CLI do rodrigo.work! 🚀')
 
-		const getProject = options.name || (await getPackages());
+    const getProject = options.name || (await getPackages())
 
-		if (!existingPackages.find((item) => item === getProject)) {
-			log.error(`App "${getProject}" não encontrado.`);
-			outro("Para mais informações, acesse: https://rodrigo.work/docs/cli");
-			process.exit(0);
-		}
+    if (!existingPackages.find((item) => item === getProject)) {
+      log.error(`App "${getProject}" não encontrado.`)
+      outro('Para mais informações, acesse: https://rodrigo.work/docs/cli')
+      process.exit(0)
+    }
 
-		const s = spinner({ indicator: "dots" });
+    const s = spinner({ indicator: 'dots' })
 
-		s.start(`Preparing to download from ${getProject}...`);
-		await new Promise((r) => setTimeout(r, 3000));
+    s.start(`Preparing to download from ${getProject}...`)
+    await new Promise((r) => setTimeout(r, 3000))
 
-		s.message("Creating temporary directory...");
-		await new Promise((r) => setTimeout(r, 3000));
-		await createTemporaryDirectory(tempDirName);
+    s.message('Creating temporary directory...')
+    await new Promise((r) => setTimeout(r, 3000))
+    await createTemporaryDirectory(tempDirName)
 
-		s.message(`Adicionando o pacote ${getProject}...`);
-		await new Promise((r) => setTimeout(r, 3000));
-		await cloneRodrigoWorkPackage({ name: getProject, cloneDir: tempDirName });
+    s.message(`Adicionando o pacote ${getProject}...`)
+    await new Promise((r) => setTimeout(r, 3000))
+    await cloneRodrigoWorkPackage({ name: getProject, cloneDir: tempDirName })
 
-		s.message(`Movendo o pacote...`);
-		await new Promise((r) => setTimeout(r, 3000));
-		await rename(
-			`${tempDirName}/${getProject}`,
-			getProject.replace(/^(apps\/|packages\/)/, ""),
-		);
+    s.message(`Movendo o pacote...`)
+    await new Promise((r) => setTimeout(r, 3000))
+    await rename(`${tempDirName}/${getProject}`, getProject.replace(/^(apps\/|packages\/)/, ''))
 
-		s.message(`Removendo diretório temporário...`);
-		await new Promise((r) => setTimeout(r, 3000));
-		await rm(tempDirName, { recursive: true, force: true });
+    s.message(`Removendo diretório temporário...`)
+    await new Promise((r) => setTimeout(r, 3000))
+    await rm(tempDirName, { recursive: true, force: true })
 
-		s.stop("Projeto adicionado com sucesso!");
+    s.stop('Projeto adicionado com sucesso!')
 
-		outro("Para mais informações, acesse: https://rodrigo.work/docs/cli");
-	} catch (error) {
-		const message =
-			error instanceof Error
-				? error.message
-				: `Failed to initialize project: ${error}`;
+    outro('Para mais informações, acesse: https://rodrigo.work/docs/cli')
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : `Failed to initialize project: ${error}`
 
-		log.error(message);
-		process.exit(1);
-	}
-};
+    log.error(message)
+    process.exit(1)
+  }
+}

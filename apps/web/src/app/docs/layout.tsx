@@ -1,70 +1,28 @@
-import { WidthLayoutTrigger } from '@/components/width-layout-trigger'
-import { baseOptions, linkItems } from '@/lib/layout.shared'
+import { DocsLayout } from '@/components/layout/docs'
+import { baseOptions } from '@/lib/layout.shared'
 import { source } from '@/lib/source'
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
-import type { ReactNode } from 'react'
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: LayoutProps<'/docs'>) {
+  const { nav, ...base } = baseOptions()
+
   return (
-    <>
-      {/* <Navbar mode="top" /> */}
-      <DocsLayout
-        {...baseOptions()}
-        containerProps={{
-          className: '',
-          style: {
-            '--fd-sidebar-width': '280px',
-            '--fd-page-width': '100%'
-          } as object
-        }}
-        links={[
-          {
-            text: 'Home',
-            url: '/',
-            active: 'url'
-          },
-          {
-            text: 'About',
-            url: '/about',
-            active: 'url'
-          },
-          {
-            text: 'Showcase',
-            url: '/showcase',
-            active: 'url'
-          },
-          {
-            type: 'custom',
-            children: <WidthLayoutTrigger />,
-            secondary: false
-          },
-          {
-            type: 'button',
-            text: 'SignIn',
-            url: 'https://github.com/rodrigo-work/rodrigo-work',
-            external: true
-          },
-          ...linkItems.filter((item) => item.type === 'icon')
-        ]}
-        nav={{ ...baseOptions().nav, mode: 'top' }}
-        sidebar={{
-          collapsible: false,
-          tabs: [
-            {
-              title: 'Documentation',
-              url: '/docs'
-            },
-            {
-              title: 'Packages',
-              url: '/docs/packages'
-            }
-          ]
-        }}
-        tabMode="navbar"
-        tree={source.pageTree}
-      >
-        {children}
-      </DocsLayout>
-    </>
+    <DocsLayout
+      containerProps={{
+        style: {
+          '--fd-page-width': '80%'
+          // '--fd-layout-width': '1400px'
+          // '--spacing-fd-container': '1120px'
+        } as object
+      }}
+      tree={source.pageTree}
+      {...base}
+      nav={{ ...nav, mode: 'top' }}
+      sidebar={{
+        collapsible: false
+      }}
+      tabMode={'navbar'}
+    >
+      {children}
+    </DocsLayout>
   )
 }

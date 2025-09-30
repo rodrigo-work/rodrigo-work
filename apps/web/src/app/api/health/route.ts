@@ -7,6 +7,6 @@ export async function GET() {
     {
       status: 'ok'
     },
-    { status: 200 }
+    { status: 403 }
   )
 }

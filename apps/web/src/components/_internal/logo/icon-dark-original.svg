@@ -1,0 +1,28 @@
+<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="42" ry="42" fill="white" />
+
+  <circle
+    cx="192"
+    cy="192"
+    r="24"
+    fill="black"
+    stroke="none"
+    stroke-width="24"
+  />
+
+  <line
+    x1="208"
+    y1="50"
+    x2="50"
+    y2="208"
+    stroke="black"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="32"
+  />
+</svg> -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#fff" rx="42" ry="42"/>
+  <circle cx="192" cy="192" r="24"/>
+  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M208 50 50 208"/>
+</svg>

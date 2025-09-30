@@ -1,47 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-  <rect class="theme-icon-back" width="256" height="256" rx="32" ry="32" fill="currentColor" stroke="currentColor" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+  <rect width="720" height="720" rx="60" ry="60" fill="black" />
   <circle
-    className="theme-icon-circle"
-    cx="192"
-    cy="192"
-    fill="currentColor"
+    cx="200"
+    cy="200"
     r="32"
-    stroke="none"
-    stroke-width="32"
+    fill="white"
   />
   <line
-    class="theme-icon-line"
     x1="208"
     y1="50"
     x2="50"
     y2="208"
-    fill="currentColor"
-    stroke="currentColor"
+    stroke="white"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-width="32"
+    stroke-width="42"
   />
   <style>
-    .theme-icon-back {
-      color: white;
-    }
-    .theme-icon-line {
-      color: black;
-    }
-    .theme-icon-circle {
-      color: black;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .theme-icon-back {
-        color: black;
-      }
-      .theme-icon-line {
-        color: white;
-      }
-      .theme-icon-circle {
-        color: white;
-      }
-    }
+    @media (prefers-color-scheme: light) { :root { filter: none; } }
+    @media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
   </style>
 </svg>

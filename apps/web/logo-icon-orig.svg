@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+  <rect width="720" height="720" rx="60" ry="60" fill="black" />
+  <circle
+    cx="200"
+    cy="200"
+    r="32"
+    fill="white"
+  />
+  <line
+    x1="208"
+    y1="50"
+    x2="50"
+    y2="208"
+    stroke="white"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="42"
+  />
+  <style>
+    @media (prefers-color-scheme: light) { :root { filter: none; } }
+    @media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
+  </style>
+</svg>
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720">
+  <!-- Fundo -->
+  <rect width="720" height="720" rx="68" ry="68" fill="black" />
+
+  <!-- Círculo branco -->
+  <circle
+    cx="562"
+    cy="562"
+    r="120"
+    fill="none"
+  />
+
+  <!-- Estrela escalada para ocupar o círculo -->
+  <polygon
+    points="
+      133,13.3
+      159.6,99.75
+      252.7,99.75
+      179.6,152.95
+      199.5,239.4
+      133,186.2
+      66.5,239.4
+      86.5,152.95
+      13.3,99.75
+      106.4,99.75
+    "
+    fill="none"
+    stroke="none"
+    transform="translate(428.8, 423.9)"
+  />
+
+  <!-- Linha branca -->
+  <line
+    x1="585"
+    y1="144"
+    x2="144"
+    y2="585"
+    stroke="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="76"
+  />
+
+  <text
+    x="360"
+    y="460"
+    font-size="278"
+    text-anchor="middle"
+    fill="white"
+    font-family="monospace"
+  >
+    *.*
+  </text>
+
+  <style>
+    @media (prefers-color-scheme: light) { :root { filter: none; } }
+    @media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
+  </style>
+</svg>
+

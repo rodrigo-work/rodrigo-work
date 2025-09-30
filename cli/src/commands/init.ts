@@ -1,13 +1,7 @@
 import { cancel, intro, isCancel, log, outro, select, spinner } from '@clack/prompts'
-import { mkdir, rename, rm } from 'node:fs/promises'
+import { mkdir, rm } from 'node:fs/promises'
 import picocolors from 'picocolors'
-import {
-  exec,
-  execSyncOpts,
-  existingPackages,
-  getExistingPackages,
-  tempDirName
-} from '../../lib/utils.js'
+import { exec, execSyncOpts, existingPackages, getExistingPackages } from '../lib/utils.js'
 
 type cloneRodrigoWorkPackageProps = {
   name: string
@@ -59,34 +53,34 @@ export const init = async (options: { name?: string }) => {
     )
     await getExistingPackages()
 
-    const getProject = options.name || (await getPackages())
+    // const getProject = options.name || (await getPackages())
 
-    if (!existingPackages.find((item) => item === getProject)) {
-      log.error(`App "${getProject}" não encontrado.`)
-      outro('Para mais informações, acesse: https://rodrigo.work/docs/cli')
-      process.exit(0)
-    }
+    // if (!existingPackages.find((item) => item === getProject)) {
+    //   log.error(`App "${getProject}" não encontrado.`)
+    //   outro('Para mais informações, acesse: https://rodrigo.work/docs/cli')
+    //   process.exit(0)
+    // }
 
     const s = spinner({ indicator: 'dots' })
 
-    s.start(`Preparing to download from ${getProject}...`)
+    s.start(`Preparing to download from ${cwd}...`)
     await new Promise((r) => setTimeout(r, 3000))
 
-    s.message(picocolors.green('Creating temporary directory...'))
-    await new Promise((r) => setTimeout(r, 3000))
-    await createTemporaryDirectory(tempDirName)
+    // s.message(picocolors.green('Creating temporary directory...'))
+    // await new Promise((r) => setTimeout(r, 3000))
+    // await createTemporaryDirectory(tempDirName)
 
-    s.message(picocolors.green(`Adicionando o pacote ${getProject}...`))
-    await new Promise((r) => setTimeout(r, 3000))
-    await cloneRodrigoWorkPackage({ name: getProject, cloneDir: tempDirName })
+    // s.message(picocolors.green(`Adicionando o pacote ${getProject}...`))
+    // await new Promise((r) => setTimeout(r, 3000))
+    // await cloneRodrigoWorkPackage({ name: getProject, cloneDir: tempDirName })
 
-    s.message(`Movendo o pacote...`)
-    await new Promise((r) => setTimeout(r, 3000))
-    await rename(`${tempDirName}/${getProject}`, getProject.replace(/^(apps\/|packages\/)/, ''))
+    // s.message(`Movendo o pacote...`)
+    // await new Promise((r) => setTimeout(r, 3000))
+    // await rename(`${tempDirName}/${getProject}`, getProject.replace(/^(apps\/|packages\/)/, ''))
 
-    s.message(`Removendo diretório temporário...`)
-    await new Promise((r) => setTimeout(r, 3000))
-    await rm(tempDirName, { recursive: true, force: true })
+    // s.message(`Removendo diretório temporário...`)
+    // await new Promise((r) => setTimeout(r, 3000))
+    // await rm(tempDirName, { recursive: true, force: true })
 
     s.stop('Projeto adicionado com sucesso!')
 

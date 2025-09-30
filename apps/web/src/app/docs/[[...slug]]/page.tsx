@@ -1,61 +1,35 @@
-import { settings } from '@/constants'
-import { source } from '@/lib/source'
-import { getMDXComponents } from '@/mdx-components'
-import { createMetadata } from '@repo/seo'
-import { getTableOfContents } from 'fumadocs-core/server'
+import { readFileSync } from 'node:fs'
 import { createRelativeLink } from 'fumadocs-ui/mdx'
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { CopyToMarkdown } from '@/components/copy-to-markdown'
+import { DocsBody, DocsDescription, DocsPage, DocsTitle } from '@/components/layout/page'
+import { getPageImage, source } from '@/lib/source'
+import { getMDXComponents } from '@/mdx-components'
 
-export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
+export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params
   const page = source.getPage(params.slug)
+  if (!page) notFound()
 
-  if (!page) {
-    notFound()
-  }
+  const MDX = page.data.body
 
-  const { body: MDXContent, toc, lastModified, full, title } = page.data
-  const toc2 = getTableOfContents('## markdown content')
+  const rawMarkdown = readFileSync(page.absolutePath, 'utf-8')
+    .toString()
+    // Removes frontmatter
+    .replace(/^---\n(?<content>.*?\n)---\n/s, '')
+    // Removes import statements for components
+    .replace(/^import\s+{[^}]+}\s+from\s+['"]#\/[^'"]+['"];(?<lineEnding>\r?\n|$)/gm, '')
 
   return (
-    <DocsPage
-      breadcrumb={{
-        enabled: true
-      }}
-      container={
-        {
-          // enabled: true
-        }
-      }
-      editOnGithub={{
-        owner: settings.docs.github.owner,
-        repo: settings.docs.github.repo,
-        sha: settings.docs.github.branch,
-        path: `apps/web/content/docs/${page.path}`
-      }}
-      footer={{
-        enabled: true
-      }}
-      full={full}
-      lastUpdate={lastModified ? new Date(lastModified) : undefined}
-      // tableOfContent={{
-      //   enabled: true,
-      //   footer: 'qqq',
-      //   style: 'normal'
-      // }}
-      // tableOfContentPopover={{
-      //   enabled: false
-      // }}
-      toc={toc}
-    >
-      {/* <InlineTOC items={toc} /> */}
-
-      <DocsTitle>{title}</DocsTitle>
+    <DocsPage full={page.data.full} toc={page.data.toc}>
+      <div className="flex items-center justify-between">
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <CopyToMarkdown markdownContent={rawMarkdown} />
+      </div>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDXContent
+        <MDX
           components={getMDXComponents({
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page)
@@ -70,18 +44,16 @@ export async function generateStaticParams() {
   return source.generateParams()
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>
-}): Promise<Metadata> {
+export async function generateMetadata(props: PageProps<'/docs/[[...slug]]'>): Promise<Metadata> {
   const params = await props.params
   const page = source.getPage(params.slug)
+  if (!page) notFound()
 
-  if (!page) {
-    notFound()
+  return {
+    title: page.data.title,
+    description: page.data.description,
+    openGraph: {
+      images: getPageImage(page).url
+    }
   }
-
-  return createMetadata({
-    title: page.data.title || settings.title,
-    description: page.data.description || settings.description
-  })
 }

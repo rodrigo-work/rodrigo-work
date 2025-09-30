@@ -2,15 +2,11 @@
   "folders": [
     {
       "name": "rodrigo-work",
-      "path": "../"
+      "path": ".."
     },
     {
       "name": "content/docs",
       "path": "../apps/web/content/docs"
-    },
-    {
-      "name": "web",
-      "path": "../apps/web"
     },
     {
       "name": "cli",
@@ -19,6 +15,10 @@
     {
       "name": "packages",
       "path": "../packages"
+    },
+    {
+      "name": "web",
+      "path": "../apps/web"
     }
   ],
   "settings": {
@@ -29,7 +29,7 @@
       "editor.defaultFormatter": "biomejs.biome"
     },
     "[jsonc]": {
-      "editor.defaultFormatter": "vscode.json-language-features"
+      "editor.defaultFormatter": "biomejs.biome"
     },
     "[typescript]": {
       "editor.defaultFormatter": "biomejs.biome"
@@ -40,12 +40,12 @@
     "editor.codeActionsOnSave": {
       "source.action.useSortedAttributes.biome": "explicit",
       "source.fixAll.biome": "explicit",
-      "source.organizeImports": "explicit"
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "emmet.showExpandedAbbreviation": "always",
+    "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
     "prettier.enable": false,
     "typescript.tsdk": "../node_modules/typescript/lib",
     "tailwindCSS.experimental.configFile": "../packages/design-system/styles/globals.css",

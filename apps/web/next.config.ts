@@ -1,20 +1,20 @@
-import { env } from '@/env'
-import { config, withAnalyzer } from '@repo/next-config'
-import { withLogging } from '@repo/observability/next-config'
+import { config as baseConfig, withAnalyzer } from '@repo/next-config'
+// import { withLogging } from '@repo/observability/next-config'
 import { createMDX } from 'fumadocs-mdx/next'
 import type { NextConfig } from 'next'
+import { env } from '@/env'
 
 const withMDX = createMDX()
-let nextConfig: NextConfig = {}
 
-nextConfig = {
+const transpilePackages = ['@repo/seo', '@repo/next-config', '@repo/typescript-config']
+
+// Base config
+let nextConfig: NextConfig = {
+  ...baseConfig,
+
   reactStrictMode: true,
-  transpilePackages: [
-    '@repo/design-system',
-    '@repo/seo',
-    '@repo/observability',
-    '@repo/next-config'
-  ],
+
+  transpilePackages,
   experimental: {
     authInterrupts: true
   },
@@ -30,25 +30,67 @@ nextConfig = {
         source: '/health(z)?',
         destination: '/api/health',
         permanent: false
-      },
-      {
-        source: '/og/:slug*',
-        destination: '/api/og/:slug*',
-        permanent: false
       }
     ]
   },
-  ...config
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/(.*)',
+  //       headers: [
+  //         {
+  //           key: 'X-Content-Type-Options',
+  //           value: 'nosniff'
+  //         },
+  //         {
+  //           key: 'X-Frame-Options',
+  //           value: 'DENY'
+  //         },
+  //         {
+  //           key: 'Referrer-Policy',
+  //           value: 'strict-origin-when-cross-origin'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       source: '/service-worker.js',
+  //       headers: [
+  //         {
+  //           key: 'Content-Type',
+  //           value: 'application/javascript; charset=utf-8'
+  //         },
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'no-cache, no-store, must-revalidate'
+  //         },
+  //         {
+  //           key: 'Content-Security-Policy',
+  //           value: "default-src 'self'; script-src 'self'"
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'iad.microlink.io'
+      }
+    ]
+  }
 }
-
-nextConfig = withLogging(nextConfig)
-
-// if (env.VERCEL) {
-//   nextConfig = withSentry(nextConfig)
-// }
 
 if (env.ANALYZE === 'true') {
   nextConfig = withAnalyzer(nextConfig)
 }
 
-export default withMDX(nextConfig)
+// nextConfig = withLogging(nextConfig)
+
+nextConfig = withMDX(nextConfig)
+
+export default nextConfig
