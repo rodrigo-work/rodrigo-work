@@ -10,15 +10,7 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      title: (
-        <>
-          <svg aria-label="Logo" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <title>Logo</title>
-            <circle cx={12} cy={12} fill="currentColor" r={12} />
-          </svg>
-          rodrigo.work
-        </>
-      )
+      title: `//rodrigo.work`
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [

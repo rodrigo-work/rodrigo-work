@@ -30,6 +30,11 @@ let nextConfig: NextConfig = {
         source: '/health(z)?',
         destination: '/api/health',
         permanent: false
+      },
+      {
+        source: '/legal/privacy(-policy)?',
+        destination: '/privacy',
+        permanent: false
       }
     ]
   },

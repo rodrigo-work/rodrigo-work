@@ -1,3 +1,9 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+.bg-success {
+  background-color: var(--fd-success);
+  color: green;
+  font-size: small;
+}

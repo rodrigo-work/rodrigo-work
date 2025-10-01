@@ -1,23 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
-  <rect width="720" height="720" rx="60" ry="60" fill="black" />
-  <circle
-    cx="200"
-    cy="200"
-    r="32"
-    fill="white"
-  />
-  <line
-    x1="208"
-    y1="50"
-    x2="50"
-    y2="208"
-    stroke="white"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="42"
-  />
-  <style>
-    @media (prefers-color-scheme: light) { :root { filter: none; } }
-    @media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
-  </style>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="520" height="520"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520">
+  <rect width="520" height="520" rx="60" ry="60" fill="black"></rect>
+  <circle cx="380" cy="380" r="32" fill="white"></circle>
+  <line x1="420" y1="50" x2="50" y2="420" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="42"></line>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+</style></svg>

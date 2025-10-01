@@ -17,7 +17,7 @@ export default function Showcase() {
   // const data = await Screenshot({ urls: websites })
 
   return (
-    <main className="px-4 py-12 z-2 w-full max-w-[1400px] mx-auto [--color-fd-border:color-mix(in_oklab,var(--color-fd-primary)_30%,transparent)]">
+    <main className="px-4 py-12 z-2 w-full max-w-screen-xl mx-auto [--color-fd-border:color-mix(in_oklab,var(--color-fd-primary)_30%,transparent)]">
       <div className="relative overflow-hidden border border-dashed p-6">
         <h1 className="mb-4 text-xl font-medium">The docs framework designed with care.</h1>
         <p className="text-fd-muted-foreground">

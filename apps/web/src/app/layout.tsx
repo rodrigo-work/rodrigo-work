@@ -1,6 +1,6 @@
 import ServiceWorkerRegister from '@/components/_internal/ServiceWorkerRegister'
 import '@/styles/global.css'
-import { AnalyticsProvider } from '@repo/analytics'
+// import { AnalyticsProvider } from '@repo/analytics'
 import { RootProvider } from 'fumadocs-ui/provider'
 import { Inter } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'

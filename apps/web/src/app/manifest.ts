@@ -49,6 +49,18 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         sizes: '1600x630',
         type: 'image/png',
         form_factor: 'wide'
+      },
+      {
+        src: '/api/og?title=Home',
+        sizes: '1600x630',
+        type: 'image/png',
+        form_factor: 'wide'
+      },
+      {
+        src: '/images/opengraph-image.png',
+        sizes: '1600x630',
+        type: 'image/png',
+        form_factor: 'wide'
       }
     ]
   }
