@@ -1,5 +1,5 @@
 # Rodrigo.work CLI
-
+<!-- https://github.com/liduchuan/cron/blob/main/PUBLISH.md -->
 **CLI utilitário para importação seletiva de pacotes de um monorepo Git via `sparse-checkout`.**
 
 Projetado para ambientes modulares e monorepos, este CLI executa operações precisas e eficientes de clonagem parcial, evitando a cópia completa do repositório. Ideal para automações, scaffolding de projetos e pipelines.
