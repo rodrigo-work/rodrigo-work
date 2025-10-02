@@ -1,14 +1,24 @@
-# EditorConfig is awesome: https://EditorConfig.org
+# http://editorconfig.org
 root = true
 
 [*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[{*.json,*.yml,*.yaml}]
-indent_style = space
+end_of_line = lf
 indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.t]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+
+[{go.mod,go.sum,*.go}]
+indent_style = tab
+
+[*.rs]
+# Keep in sync with rustfmt
+max_line_length = 100
+indent_size = 4
